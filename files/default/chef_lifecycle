@@ -1,0 +1,23 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:           chef-registration
+# Required-Start:     $local_fs $remote_fs $network $syslog
+# Required-Stop:      $local_fs $remote_fs $network $syslog
+# Default-Start:      2 3 4 5
+# Default-Stop:       0 2 3 4 5 6
+# Short-Description:  registers / deletes chef client
+case $1 in
+        start)
+        ;;
+        stop)
+        echo "***** Deleting node and client *****"
+        instance=`cat /etc/chef/client.rb | grep node_name | cut -d '"' -f 2`
+        knife node delete $instance -c /etc/chef/knife.rb -y
+        knife client delete $instance -c /etc/chef/knife.rb -y
+        ;;
+        *)
+        echo $0 start or stop
+        ;;
+esac
+

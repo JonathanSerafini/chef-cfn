@@ -19,9 +19,8 @@ bash "install #{pkg_source}" do
 end
 
 #
-# create cfn-hup configurations
+# Create cfn-hup configurations
 #
-
 directory "/etc/cfn/hooks.d" do
   recursive true
   mode "0700"
@@ -42,9 +41,8 @@ template "/etc/cfn/cfn-hup.conf" do
 end
 
 #
-# create 
+# Create hook to execute action on metadata change
 #
-
 template "/etc/cfn/hooks.d/cfn-auto-reloader.conf" do
   source "hooks.d/cfn_auto_reloader.conf.erb"
   variables lazy {
