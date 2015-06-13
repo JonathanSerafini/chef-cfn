@@ -24,6 +24,8 @@ Ohai.plugin(:CFN) do
       region      = ec2[:placement_availability_zone][0...-1]
       instance_id = ec2[:instance_id]
 
+      cfn[:stack][:region_id]  = region
+
       # 
       # Fetch a hash of instance data
       #

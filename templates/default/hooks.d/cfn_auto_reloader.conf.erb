@@ -1,0 +1,18 @@
+<%
+  path = [ 
+    "Resources", @logical_id, "Metadata", "AWS::CloudFormation::Init" 
+  ].join('.')
+
+  command = [ 
+    "/usr/local/bin/cfn-init",  "--stack #{@stack}",
+                                "--resource #{path}",
+                                "--region #{@region}",
+                                "--configsets #{@configsets}"
+  ].join(' ')
+%>
+[cfn-auto-reloader-hook]
+triggers=post.update
+path=<%= path %>
+action=<%= command %>
+runas=root
+
