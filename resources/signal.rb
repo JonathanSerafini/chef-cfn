@@ -4,9 +4,7 @@
 # http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-signal.html
 #
 
-require 'uri'
-
-action :signal
+actions :signal
 default_action :signal
 
 # AWS::CloudFormation::WaitConditionHandle URL

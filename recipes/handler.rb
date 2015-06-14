@@ -13,15 +13,15 @@ end
 
 chef_handler "cloudformation_signal_handler" do
   source path
-  arguments lazy do
+  arguments lazy {
     {
-      url: node[:cfn][:metadata][:wait_handlers][:chef_run_finished],
+      url: node[:cfn][:properties][:wait_handlers][:chef_run_finished],
       unique_id: node[:cfn][:ec2][:instance_id],
       data: "Chef run complete"
     }
-  end
+  }
   only_if do
-    node[:cfn][:metadata][:wait_handlers][:chef_run_finished] rescue false
+    node[:cfn][:properties][:wait_handlers][:chef_run_finished] rescue false
   end
 end
 

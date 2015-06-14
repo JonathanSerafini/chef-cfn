@@ -30,7 +30,7 @@ template "/etc/cfn/cfn-hup.conf" do
   variables lazy {
     {
       stack:    node[:cfn][:stack][:stack_name],
-      region:   node[:cfn][:stack][:region_id],
+      region:   node[:cfn][:vpc][:region_id],
       interval: node[:cfn][:tools_hup][:interval],
       verbose:  node[:cfn][:tools_hup][:verbose]
     }
@@ -48,9 +48,9 @@ template "/etc/cfn/hooks.d/cfn-auto-reloader.conf" do
   variables lazy {
     {
       stack:      node[:cfn][:stack][:stack_name],
-      region:     node[:cfn][:stack][:region_id],
+      region:     node[:cfn][:vpc][:region_id],
       logical_id: node[:cfn][:stack][:logical_id],
-      properties: node[:cfn][:properties]
+      properties: node[:cfn][:properties],
       configsets: "chef_exec"
     }
   }
