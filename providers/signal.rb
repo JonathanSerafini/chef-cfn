@@ -5,9 +5,6 @@ def why_run_supported?
   true
 end
 
-action :signal
-default_action :signal
-
 action :signal do
   new_resource = @new_resource
 
