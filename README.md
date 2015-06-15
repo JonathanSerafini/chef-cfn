@@ -115,15 +115,72 @@ Installs dependencies
 
 ### chef_cfn::ohai
 
-Installs the ohai[cfn] plugin
+Installs the aws-sdk chef_gem as well as the ohai[cfn] plugin.
+When this runs, it will populate attributes under the node['cfn'] namespace which may then be used to report signals with the signal handler.
+
+###### Required IAM policies
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1434370036000",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:DescribeStackResource",
+                "ec2:DescribeInstances"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
 
 ### chef_cfn::handler
 
-Installs a handler to signal cloudformation
+Installs a handler to signal cloudformation of the success or failure of the chef run. When used with either Creation or Update profiles in cloudformation, we can ensure that only nodes with valid chef runs are considered healthy.
+
+###### Required IAM policies
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1434370036000",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:SignalResource",
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
 
 ### chef_cfn::mounts
 
 Mounts cloudformation defined volumes
+
+###### Example Cloudformation Attributes
+```json
+{
+  "AutoScailingGroup": {
+    "Metadata": {
+      "Mounts": {
+        "xvdb3": {
+          "mount_point": "/var/log",
+          "mount_options": "",
+          "filesystem": ""
+        }
+      }
+    }
+  }
+}
+```
 
 ### chef_cfn::tools
 
@@ -138,7 +195,7 @@ Resources
 
 ### chef_cfn_signal
 
-Provides an interface to trigger cloudformation signals from within recipes.
+Provides an interface to trigger cloudformation signals from within recipes. This is designed to be used with cloudformation WaitConditions. 
 
 #### Actions
 
@@ -159,27 +216,6 @@ Ohai Plugins
 ### CFN
 
 Fetches instance attributes from Cloudformation:DescribeResource as well as EC2:DescribeInstances.
-
-#### Required IAM Permissions
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "Stmt1434370036000",
-            "Effect": "Allow",
-            "Action": [
-                "cloudformation:DescribeStackResource",
-                "ec2:DescribeInstances"
-            ],
-            "Resource": [
-                "*"
-            ]
-        }
-    ]
-}
-```
 
 License and Author
 ------------------

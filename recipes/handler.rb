@@ -15,13 +15,11 @@ chef_handler "CFN::CloudFormationSignalHandler" do
   source path
   arguments lazy {
     {
-      url: node[:cfn][:properties][:wait_handlers][:chef_run_finished],
-      unique_id: node[:ec2][:instance_id],
-      data: "Chef run complete"
+      region:     node[:cfn][:vpc][:region_id],
+      stack_name: node[:cfn][:stack][:stack_name],
+      logical_id: node[:cfn][:stack][:logical_id],
+      unique_id:  node[:ec2][:instance_id]
     }
   }
-  only_if do
-    node[:cfn][:properties][:wait_handlers][:chef_run_finished] rescue false
-  end
 end
 

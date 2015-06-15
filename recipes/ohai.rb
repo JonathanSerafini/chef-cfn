@@ -9,12 +9,12 @@ include_recipe "ohai::default"
 # Ensure AWS-SDK is installed
 # - reload ohai[cfn] for first-boot scenarios
 #
-ohai "cfn" do
-  plugin "cfn"
-  action :nothing
-end
 
 chef_gem "aws-sdk" do
-  notifies :reload, "ohai[cfn]", :immediately
+  compile_time true
 end
+
+ohai "cfn" do
+  plugin "cfn"
+end.run_action(:reload)
 
