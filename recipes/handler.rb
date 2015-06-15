@@ -11,12 +11,12 @@ cookbook_file path do
   mode "0644"
 end
 
-chef_handler "cloudformation_signal_handler" do
+chef_handler "CFN::CloudFormationSignalHandler" do
   source path
   arguments lazy {
     {
       url: node[:cfn][:properties][:wait_handlers][:chef_run_finished],
-      unique_id: node[:cfn][:ec2][:instance_id],
+      unique_id: node[:ec2][:instance_id],
       data: "Chef run complete"
     }
   }

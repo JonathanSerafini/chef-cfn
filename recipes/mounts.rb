@@ -19,6 +19,8 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
       raise ArgumentError, "Device not found: #{device_id}"
     end
 
+    # EC2 instances are spun up with a ephemeral drive on /mnt. 
+    # - unmount it if it conflicts
     if mount_point == "/mnt" and
        node[:filesystem][device] and
        node[:filesystem][device][:mount] != mount_point
@@ -30,6 +32,16 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
       end
     end
 
+    # In order to support early mounting, create any missing directories
+    # if they do not exist
+    unless ::File.exists?(mount_point)
+      directory mount_point do
+        recursive true
+      end
+    end
+
+    # Create the filesystem if non exists and if this wasn't declared as
+    # being a snapshot source
     execute "mkfs #{device_id}" do
       command "mkfs -t #{filesystem} #{device}"
       not_if do
@@ -44,7 +56,7 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
       mount_point mount_point
       device device
       options mount_options
-      actions [:enable, :mount]
+      action [:enable, :mount]
     end
   end
 end
