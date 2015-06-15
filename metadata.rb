@@ -12,17 +12,20 @@ depends "ohai"
 # 
 # Attributes
 #
-grouping "cfn",
-  title: "Cloudformation",
-  description: "Cloudformation namespace"
+attribute "cfn/properties",
+  display_name: "Cloudformation Properties",
+  description: "Cloudformation metadata properties merged with cfn hint",
+  default: {}
 
-grouping "cfn/properties",
-  title: "Cloudformation Properties",
-  description: "Cloudformation metadata properties merged with cfn hint"
+attribute "cfn/properties/mounts",
+  display_name: "Cloudformation defined mount points",
+  description: "Provides a mechanism to ensure volumes are mounted during chef",
+  default: {}
 
-grouping "cfn/stack",
-  title: "Cloudformation Stack",
-  description: "Cloudformation Stack ohai namespace"
+attribute "cfn/stack",
+  display_name: "Cloudformation Stack",
+  description: "Cloudformation Stack ohai namespace",
+  default: {}
 
 attribute "cfn/stack/autoscaling_name",
   display_name: "Autoscaling group name",
@@ -44,16 +47,22 @@ attribute "cfn/stack/stack_name",
   description: "Cloudformation stack name",
   default: "ohai"
 
-grouping "cfn/tags",
-  title: "Cloudformation Tags",
-  description: "Cloudformation Tags ohai namespace"
+attribute "cfn/tags",
+  display_name: "Cloudformation Tags",
+  description: "Cloudformation Tags ohai namespace, converted to snake case",
+  default: {}
 
-attribute "cfn/tools/hup/interval",
+attribute "cfn/tools/delete_on_shutdown",
+  title: "Delete the chef node on instance shutdown",
+  description: "Delete the chef node on instance shutdown",
+  default: true
+
+attribute "cfn/tools/cfn_hup/interval",
   title: "Scan interval",
   description: "cfn-hup will scan for metadata changes every N seconds",
   default: 10
 
-attribute "cfn/tools/hup/verbose",
+attribute "cfn/tools/cfn_hup/verbose",
   title: "cfn-hup verbosity",
   description: "Should cfn-hup provide verbose output",
   default: false
@@ -62,9 +71,10 @@ attribute "cfn/tools/url",
   title: "Cloudformation init tools url",
   description: "Tarball url for cfn-init installation"
 
-grouping "cfn/vpc",
-  title: "Cloudformation VPC",
-  description: "Cloudformation VPC ohai namespace"
+attribute "cfn/vpc",
+  display_name: "Cloudformation VPC",
+  description: "Cloudformation VPC ohai namespace",
+  default: {}
 
 attribute "cfn/vpc/region_id",
   display_name: "Aws Region id",

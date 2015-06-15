@@ -8,5 +8,8 @@ end
 
 service "chef_lifecycle" do
   action :enable
+  only_if do
+    node[:cfn][:tools][:delete_on_shutdown]
+  end
 end
 

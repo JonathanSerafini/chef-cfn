@@ -31,8 +31,8 @@ template "/etc/cfn/cfn-hup.conf" do
     {
       stack:    node[:cfn][:stack][:stack_name],
       region:   node[:cfn][:vpc][:region_id],
-      interval: node[:cfn][:tools_hup][:interval],
-      verbose:  node[:cfn][:tools_hup][:verbose]
+      interval: node[:cfn][:tools][:cfn_hup][:interval],
+      verbose:  node[:cfn][:tools][:cfn_hup][:verbose]
     }
   }
   only_if do
