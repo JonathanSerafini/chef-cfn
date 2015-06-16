@@ -21,5 +21,8 @@ chef_handler "CFN::CloudFormationSignalHandler" do
       unique_id:  node[:ec2][:instance_id]
     }
   }
+  only_if do
+    node[:cfn][:stack][:logical_id] rescue nil
+  end
 end
 
