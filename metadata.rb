@@ -1,10 +1,12 @@
-name             'chef_cfn'
-maintainer       'Jonathan Serafini'
-maintainer_email 'jonathan@serafini.ca'
-license          'Apache 2.0'
-description      'Chef integration with AWS cloudformation'
-long_description 'Chef integration with AWS cloudformation'
-version          '0.1.0'
+name             "chef_cfn"
+maintainer       "Jonathan Serafini"
+maintainer_email "jonathan@serafini.ca"
+license          "Apache 2.0"
+description      "Chef integration with AWS cloudformation"
+long_description IO.read(File.join(File.dirname(__FILE__), "README.md"))
+issues_url       "https://github.com/JonathanSerafini/chef-cfn/issues"
+source_url       "https://github.com/JonathanSerafini/chef-cfn"
+version          "0.9.0"
 
 depends "chef_handler"
 depends "ohai"
