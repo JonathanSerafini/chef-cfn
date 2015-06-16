@@ -116,7 +116,9 @@ Installs dependencies
 ### chef_cfn::ohai
 
 Installs the aws-sdk chef_gem as well as the ohai[cfn] plugin.
-When this runs, it will populate attributes under the node['cfn'] namespace which may then be used to report signals with the signal handler.
+When this runs, it will populate the properties, stack, tags and vpc attribute hashes under the node['cfn'] namespace which may then be used to report signals with the signal handler. 
+
+In addition, the properties hash will be merged, and potentially overriden, by any hints set in the cfn hint.
 
 ###### Required IAM policies
 ```json
@@ -161,9 +163,30 @@ Installs a handler to signal cloudformation of the success or failure of the che
 }
 ```
 
+###### Example Cloudformation
+```json
+{
+  "AutoScailingGroup": {
+    "CreationPolicy": {
+      "ResourceSignal": {
+        "Count": 1,
+        "Timeout": "PT10M"
+      }
+    },
+    "UpdatePolicy": {
+      "AutoScalingRollingUpdate": {
+        "WaitOnResourceSignals": "true"
+      }
+    }
+  }
+}
+```
+
 ### chef_cfn::mounts
 
-Mounts cloudformation defined volumes
+Mounts cloudformation defined volumes.
+
+Please take note that this recipe assumes that cloudformation was responsible to creating and managing the volumes, not chef. As such, all block devices must exist prior to attempting to mount them.
 
 ###### Example Cloudformation Attributes
 ```json
@@ -184,11 +207,14 @@ Mounts cloudformation defined volumes
 
 ### chef_cfn::tools
 
-Installs cloudformation cfn-init tools
+Installs cloudformation cfn-init tools such as : 
+
+* cfn-init
+* cfn-hup: Periodic polling of cloudformation resource metadata to determine when triggered actions should run.
 
 ### chef_cfn::shutdown
 
-Installs a service which will delete the node
+Installs a service which will delete the node when the instance shuts down.
 
 Resources
 ---------
