@@ -1,3 +1,4 @@
-source "https://supermarket.chef.io"
 
+source "http://berkshelf:26200"
 metadata
+
