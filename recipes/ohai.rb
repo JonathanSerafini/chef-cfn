@@ -11,7 +11,7 @@ include_recipe "ohai::default"
 #
 
 chef_gem "aws-sdk" do
-  compile_time true
+  compile_time true if respond_to?(:compile_time)
 end
 
 ohai "cfn" do
