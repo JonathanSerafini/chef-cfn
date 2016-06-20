@@ -1,4 +1,8 @@
 
+# Install dependencies
+#
+package "python-setuptools"
+
 #
 # Install aws-cfn-bootstrap which will provide
 # - cfn-init    : cloudformation node init
