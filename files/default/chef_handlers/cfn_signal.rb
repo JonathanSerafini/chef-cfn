@@ -23,7 +23,7 @@ module CFN
     end
 
     def report
-      status = run_status.success? ? "SUCCESS" : "FAILURE"
+      status = run_status.success? ? 'SUCCESS' : 'FAILURE'
 
       begin
         require 'aws-sdk-core'

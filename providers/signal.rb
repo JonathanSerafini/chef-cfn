@@ -18,7 +18,7 @@ action :signal do
   http_request "send signal #{new_resource.name}" do
     url       new_resource.url
     message   JsonCompat.to_json(new_resource.message)
-    headers   "Content-Type" => ""
+    headers   'Content-Type' => ''
     action    :put
     notifies  :run, "ruby_block[#{new_resource.name}]", :immediately
   end

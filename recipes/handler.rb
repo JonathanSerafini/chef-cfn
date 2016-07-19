@@ -3,15 +3,15 @@
 # Install Chef-Run handlers
 # - with working ohai[cfn], this allows signaling cloudformation
 #
-include_recipe "chef_handler::default"
+include_recipe 'chef_handler::default'
 
-path = ::File.join(node[:chef_handler][:handler_path], "cfn_signal.rb")
+path = ::File.join(node[:chef_handler][:handler_path], 'cfn_signal.rb')
 cookbook_file path do
-  source "chef_handlers/cfn_signal.rb"
-  mode "0644"
+  source 'chef_handlers/cfn_signal.rb'
+  mode '0644'
 end
 
-chef_handler "CFN::CloudFormationSignalHandler" do
+chef_handler 'CFN::CloudFormationSignalHandler' do
   source path
   arguments lazy {
     {

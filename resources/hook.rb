@@ -20,7 +20,7 @@ attribute :path,
 # Command to runas
 attribute :runas, 
   kind_of: String,
-  default: "root"
+  default: 'root'
 
 # Trigger hook on this CloudFormation metadata action
 attribute :triggers,

@@ -12,8 +12,8 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
     device  = "/dev/#{device_id}"
 
     mount_point   = mount_opts[:mount_point]
-    mount_options = mount_opts[:options] || "noatime,nodiratime,nobootwait"
-    filesystem    = mount_opts[:filesystem] || "ext4"
+    mount_options = mount_opts[:options] || 'noatime,nodiratime,nobootwait'
+    filesystem    = mount_opts[:filesystem] || 'ext4'
 
     unless ::File.blockdev?(device)
       raise ArgumentError, "Device not found: #{device_id}"
@@ -21,12 +21,12 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
 
     # EC2 instances are spun up with a ephemeral drive on /mnt. 
     # - unmount it if it conflicts
-    if mount_point == "/mnt" and
+    if mount_point == '/mnt' and
        node[:filesystem][device] and
        node[:filesystem][device][:mount] != mount_point
 
-      mount "/mnt" do
-        mount_point "/mnt"
+      mount '/mnt' do
+        mount_point '/mnt'
         device device
         action [:disable, :unmount]
       end

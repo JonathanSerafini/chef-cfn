@@ -2,12 +2,12 @@
 require 'chef/json_compat'
 
 Ohai.plugin(:CFN) do
-  provides "cfn/tags",
-           "cfn/stack",
-           "cfn/vpc",
-           "cfn/properties"
+  provides 'cfn/tags',
+           'cfn/stack',
+           'cfn/vpc',
+           'cfn/properties'
 
-  depends "ec2"
+  depends 'ec2'
 
   collect_data do
     cfn Mash.new
@@ -19,13 +19,13 @@ Ohai.plugin(:CFN) do
     begin
       require 'aws-sdk-core'
     rescue LoadError => e
-      Ohai::Log.error("cfn - cannot load gem: aws-sdk-core")
+      Ohai::Log.error('cfn - cannot load gem: aws-sdk-core')
       raise
     end
 
-    unless hint?("ec2")
-      Ohai::Log.error("cfn - ec2 ohai module failed to load")
-      raise ArgumentError, "ec2 ohai module failed to load"
+    unless hint?('ec2')
+      Ohai::Log.error('cfn - ec2 ohai module failed to load')
+      raise ArgumentError, 'ec2 ohai module failed to load'
     end
 
     region      = ec2[:placement_availability_zone][0...-1]
@@ -66,10 +66,10 @@ Ohai.plugin(:CFN) do
     cfn[:tags] = Hash[tags]
 
     # Store cloudformation stack related attributes
-    cfn[:stack][:stack_id]   = cfn[:tags]["aws:cloudformation:stack_id"]
-    cfn[:stack][:stack_name] = cfn[:tags]["aws:cloudformation:stack_name"]
-    cfn[:stack][:logical_id] = cfn[:tags]["aws:cloudformation:logical_id"]
-    cfn[:stack][:autocaling_name]= cfn[:tags]["aws:autoscaling:group_name"]
+    cfn[:stack][:stack_id]   = cfn[:tags]['aws:cloudformation:stack_id']
+    cfn[:stack][:stack_name] = cfn[:tags]['aws:cloudformation:stack_name']
+    cfn[:stack][:logical_id] = cfn[:tags]['aws:cloudformation:logical_id']
+    cfn[:stack][:autocaling_name]= cfn[:tags]['aws:autoscaling:group_name']
 
     #
     # Fetch a hash of stack resource metadata
@@ -103,7 +103,7 @@ Ohai.plugin(:CFN) do
     # 
     # Add additional properties from hints file
     #
-    cfn_properties_hints = hint?("cfn_properties") || {}
+    cfn_properties_hints = hint?('cfn_properties') || {}
     cfn_properties_hints.each { |k,v| cfn[:properties][k] = v }
   end
 end

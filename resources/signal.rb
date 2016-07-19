@@ -20,7 +20,7 @@ attribute :unique_id,
 # Data to send back to the waitConditionHandle
 attribute :data,
   kind_of: String,
-  default: ""
+  default: ''
 
 # Trigger a Success or Failure event
 attribute :success,
@@ -30,7 +30,7 @@ attribute :success,
 # Status reason for the resource (failure) event
 attribute :reason,
   kind_of: String,
-  default: "Chef triggered signal from resource"
+  default: 'Chef triggered signal from resource'
 
 # Ensure signal is only sent once
 attribute :once,
@@ -39,7 +39,7 @@ attribute :once,
 
 # Message body sent as as part of the signal
 def message
-  status = new_resource.success ? "SUCCESS" : "FAILURE"
+  status = new_resource.success ? 'SUCCESS' : 'FAILURE'
   {
     Status: status,
     UniqueId: unique_id,
@@ -56,7 +56,7 @@ def initialize(*args)
   node.run_state[:signals_sent] ||= []
 
   # Provide a default unique_id
-  @unique_id = node[:hostname] + "-" + Random.rand(10**5).to_s
+  @unique_id = node[:hostname] + '-' + Random.rand(10**5).to_s
 
   super
 

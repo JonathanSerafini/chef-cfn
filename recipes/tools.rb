@@ -1,7 +1,7 @@
 
 # Install dependencies
 #
-package "python-setuptools"
+package 'python-setuptools'
 
 #
 # Install aws-cfn-bootstrap which will provide
@@ -25,12 +25,12 @@ end
 #
 # Create cfn-hup configurations
 #
-directory "/etc/cfn/hooks.d" do
+directory '/etc/cfn/hooks.d' do
   recursive true
-  mode "0700"
+  mode '0700'
 end
 
-template "/etc/cfn/cfn-hup.conf" do
+template '/etc/cfn/cfn-hup.conf' do
   variables lazy {
     {
       stack:    node[:cfn][:stack][:stack_name],
@@ -47,15 +47,15 @@ end
 #
 # Create hook to execute action on metadata change
 #
-template "/etc/cfn/hooks.d/cfn-auto-reloader.conf" do
-  source "hooks.d/cfn_auto_reloader.conf.erb"
+template '/etc/cfn/hooks.d/cfn-auto-reloader.conf' do
+  source 'hooks.d/cfn_auto_reloader.conf.erb'
   variables lazy {
     {
       stack:      node[:cfn][:stack][:stack_name],
       region:     node[:cfn][:vpc][:region_id],
       logical_id: node[:cfn][:stack][:logical_id],
       properties: node[:cfn][:properties],
-      configsets: "chef_exec"
+      configsets: 'chef_exec'
     }
   }
   only_if do
