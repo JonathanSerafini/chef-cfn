@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v1.0.0
+------
+* Update ohai recipes to rely on the newer ohai v4+ format
+
 v0.9.2
 ------
 * Rubocop auto-correct Style/StringLiterals
