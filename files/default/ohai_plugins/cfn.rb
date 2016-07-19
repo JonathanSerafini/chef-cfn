@@ -1,7 +1,7 @@
 
 require 'chef/json_compat'
 
-Ohai.plugin(:CFN) do
+Ohai.plugin(:Cfn) do
   provides 'cfn/tags',
            'cfn/stack',
            'cfn/vpc',
