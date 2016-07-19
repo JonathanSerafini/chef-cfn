@@ -10,6 +10,7 @@ v0.9.2
 * Rubocop auto-correct Style/SpaceAroundEqualsInParameterDefault
 * Rubocop auto-correct Style/ExtraSpacing
 * Rubocop auto-correct Style/SpaceAfterComma
+* Rubocop auto-correct Style/SpaceAroundOperators
 
 v0.9.1
 ------

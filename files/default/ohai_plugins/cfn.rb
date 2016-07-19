@@ -69,7 +69,7 @@ Ohai.plugin(:CFN) do
     cfn[:stack][:stack_id]   = cfn[:tags]['aws:cloudformation:stack_id']
     cfn[:stack][:stack_name] = cfn[:tags]['aws:cloudformation:stack_name']
     cfn[:stack][:logical_id] = cfn[:tags]['aws:cloudformation:logical_id']
-    cfn[:stack][:autocaling_name]= cfn[:tags]['aws:autoscaling:group_name']
+    cfn[:stack][:autocaling_name] = cfn[:tags]['aws:autoscaling:group_name']
 
     #
     # Fetch a hash of stack resource metadata
@@ -91,7 +91,7 @@ Ohai.plugin(:CFN) do
           # Fetch metadata if present
           metadata = Chef::JSONCompat.
                       from_json(resource[:metadata], symbolize_keys: true)
-          metadata.each { |k, v| cfn[:properties][k] =v }
+          metadata.each { |k, v| cfn[:properties][k] = v }
         rescue Exception => e
           Ohai::Log.debug("cfn: failed to parse metadata: #{e.message}")
         end
