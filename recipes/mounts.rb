@@ -9,7 +9,7 @@
 #
 if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
   node[:cfn][:properties][:mounts].each do |device_id, mount_opts|
-    device  = "/dev/#{device_id}"
+    device = "/dev/#{device_id}"
 
     mount_point   = mount_opts[:mount_point]
     mount_options = mount_opts[:options] || 'noatime,nodiratime,nobootwait'

@@ -8,6 +8,7 @@ v0.9.2
 * Rubocop auto-correct Style/TrailingWhitespace
 * Rubocop auto-correct Lint/DeprecatedClassMethods
 * Rubocop auto-correct Style/SpaceAroundEqualsInParameterDefault
+* Rubocop auto-correct Style/ExtraSpacing
 
 v0.9.1
 ------

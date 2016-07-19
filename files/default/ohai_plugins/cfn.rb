@@ -14,7 +14,7 @@ Ohai.plugin(:CFN) do
     cfn[:vpc]   = Mash.new
     cfn[:tags]  = Mash.new
     cfn[:stack] = Mash.new
-    cfn[:properties]  = Mash.new
+    cfn[:properties] = Mash.new
 
     begin
       require 'aws-sdk-core'
@@ -48,7 +48,7 @@ Ohai.plugin(:CFN) do
     # Store some vpc related attributes
     cfn[:vpc][:vpc_id] = instance[:vpc_id]
     cfn[:vpc][:subnet_id] = instance[:subnet_id]
-    cfn[:vpc][:region_id]  = region
+    cfn[:vpc][:region_id] = region
 
     # SnakeCase attribute keys
     tags = instance[:tags].map do |hash|
