@@ -8,7 +8,7 @@ module CFN
     attr_reader :logical_id
     attr_reader :unique_id
 
-    def initialize(config={})
+    def initialize(config = {})
       @config = config
 
       %w(region unique_id logical_id stack_name).each do |key|
