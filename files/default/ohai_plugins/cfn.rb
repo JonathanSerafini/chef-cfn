@@ -53,8 +53,8 @@ Ohai.plugin(:CFN) do
     # SnakeCase attribute keys
     tags = instance[:tags].map do |hash|
       hash_key = hash[:key].
-        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-        gsub(/([a-z\d])([A-Z])/,'\1_\2').
+        gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').
+        gsub(/([a-z\d])([A-Z])/, '\1_\2').
         tr('-', '_').
         gsub(/\s/, '_').
         gsub(/__+/, '_').
@@ -91,7 +91,7 @@ Ohai.plugin(:CFN) do
           # Fetch metadata if present
           metadata = Chef::JSONCompat.
                       from_json(resource[:metadata], symbolize_keys: true)
-          metadata.each { |k,v| cfn[:properties][k] =v }
+          metadata.each { |k, v| cfn[:properties][k] =v }
         rescue Exception => e
           Ohai::Log.debug("cfn: failed to parse metadata: #{e.message}")
         end
@@ -104,6 +104,6 @@ Ohai.plugin(:CFN) do
     # Add additional properties from hints file
     #
     cfn_properties_hints = hint?('cfn_properties') || {}
-    cfn_properties_hints.each { |k,v| cfn[:properties][k] = v }
+    cfn_properties_hints.each { |k, v| cfn[:properties][k] = v }
   end
 end

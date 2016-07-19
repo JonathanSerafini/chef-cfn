@@ -9,6 +9,7 @@ v0.9.2
 * Rubocop auto-correct Lint/DeprecatedClassMethods
 * Rubocop auto-correct Style/SpaceAroundEqualsInParameterDefault
 * Rubocop auto-correct Style/ExtraSpacing
+* Rubocop auto-correct Style/SpaceAfterComma
 
 v0.9.1
 ------
