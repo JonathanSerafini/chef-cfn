@@ -31,7 +31,7 @@ Ohai.plugin(:CFN) do
     region      = ec2[:placement_availability_zone][0...-1]
     instance_id = ec2[:instance_id]
 
-    # 
+    #
     # Fetch a hash of instance data
     #
     begin
@@ -44,7 +44,7 @@ Ohai.plugin(:CFN) do
       Ohai::Log.error("cfn: failed to fetch instance: #{e.message}")
       raise
     end
-  
+
     # Store some vpc related attributes
     cfn[:vpc][:vpc_id] = instance[:vpc_id]
     cfn[:vpc][:subnet_id] = instance[:subnet_id]
@@ -75,7 +75,7 @@ Ohai.plugin(:CFN) do
     # Fetch a hash of stack resource metadata
     #
     if cfn[:stack][:stack_name]
-      begin 
+      begin
         client = Aws::CloudFormation::Client.new(region: region)
         resource = client.
           describe_stack_resource(stack_name: cfn[:stack][:stack_name],
@@ -100,7 +100,7 @@ Ohai.plugin(:CFN) do
       end
     end
 
-    # 
+    #
     # Add additional properties from hints file
     #
     cfn_properties_hints = hint?('cfn_properties') || {}

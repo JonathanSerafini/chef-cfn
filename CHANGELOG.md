@@ -5,6 +5,7 @@ v0.9.2
 ------
 * Rubocop auto-correct Style/StringLiterals
 * Rubocop auto-correct Style/TrailingBlankLines
+* Rubocop auto-correct Style/TrailingWhitespace
 
 v0.9.1
 ------

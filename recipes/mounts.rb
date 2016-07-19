@@ -19,7 +19,7 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
       raise ArgumentError, "Device not found: #{device_id}"
     end
 
-    # EC2 instances are spun up with a ephemeral drive on /mnt. 
+    # EC2 instances are spun up with a ephemeral drive on /mnt.
     # - unmount it if it conflicts
     if mount_point == '/mnt' and
        node[:filesystem][device] and

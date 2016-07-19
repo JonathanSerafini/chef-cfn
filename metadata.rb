@@ -11,7 +11,7 @@ version          '0.9.1'
 depends 'chef_handler'
 depends 'ohai'
 
-# 
+#
 # Attributes
 #
 attribute 'cfn/properties',

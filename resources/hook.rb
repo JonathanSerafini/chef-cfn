@@ -18,7 +18,7 @@ attribute :path,
   required: true
 
 # Command to runas
-attribute :runas, 
+attribute :runas,
   kind_of: String,
   default: 'root'
 
