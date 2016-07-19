@@ -86,7 +86,7 @@ Ohai.plugin(:CFN) do
         resource = {}
       end
 
-      unless resource.empty? or resource[:metadata].nil?
+      unless resource.empty? || resource[:metadata].nil?
         begin
           # Fetch metadata if present
           metadata = Chef::JSONCompat.

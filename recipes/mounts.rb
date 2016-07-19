@@ -7,7 +7,7 @@
 #   filesystem: "ext4" || "snap-342643"
 # }
 #
-if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
+if node[:cfn][:properties] && node[:cfn][:properties][:mounts]
   node[:cfn][:properties][:mounts].each do |device_id, mount_opts|
     device = "/dev/#{device_id}"
 
@@ -21,8 +21,8 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
 
     # EC2 instances are spun up with a ephemeral drive on /mnt.
     # - unmount it if it conflicts
-    if mount_point == '/mnt' and
-       node[:filesystem][device] and
+    if mount_point == '/mnt' &&
+       node[:filesystem][device] &&
        node[:filesystem][device][:mount] != mount_point
 
       mount '/mnt' do
@@ -45,7 +45,7 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
     execute "mkfs #{device_id}" do
       command "mkfs -t #{filesystem} #{device}"
       not_if do
-        node[:filesystem][device] and node[:filesystem][device][:mount]
+        node[:filesystem][device] && node[:filesystem][device][:mount]
       end
       not_if do
         filesystem =~ /^snap-/

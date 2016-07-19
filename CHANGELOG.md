@@ -11,6 +11,7 @@ v0.9.2
 * Rubocop auto-correct Style/ExtraSpacing
 * Rubocop auto-correct Style/SpaceAfterComma
 * Rubocop auto-correct Style/SpaceAroundOperators
+* Rubocop auto-correct Style/AndOr
 
 v0.9.1
 ------

@@ -67,6 +67,6 @@ def initialize(*args)
 
   # Ensure that this only runs once if requested
   not_if do
-    once and node.run_state[:signals_sent].includes?(url)
+    once && node.run_state[:signals_sent].includes?(url)
   end
 end
