@@ -34,7 +34,7 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
 
     # In order to support early mounting, create any missing directories
     # if they do not exist
-    unless ::File.exists?(mount_point)
+    unless ::File.exist?(mount_point)
       directory mount_point do
         recursive true
       end
