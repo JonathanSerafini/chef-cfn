@@ -17,4 +17,3 @@ end
 ohai 'cfn' do
   plugin 'cfn'
 end.run_action(:reload)
-

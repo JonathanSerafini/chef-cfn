@@ -70,4 +70,3 @@ def initialize(*args)
     once and node.run_state[:signals_sent].includes?(url)
   end
 end
-

@@ -60,4 +60,3 @@ if node[:cfn][:properties] and node[:cfn][:properties][:mounts]
     end
   end
 end
-

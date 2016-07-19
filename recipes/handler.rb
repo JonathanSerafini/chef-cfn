@@ -25,4 +25,3 @@ chef_handler 'CFN::CloudFormationSignalHandler' do
     node[:cfn][:stack][:logical_id] rescue nil
   end
 end
-

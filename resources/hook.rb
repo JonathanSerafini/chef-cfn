@@ -26,4 +26,3 @@ attribute :runas,
 attribute :triggers,
   kind_of: [String, Array],
   equal_to: %w(post.add post.update posr.remove)
-

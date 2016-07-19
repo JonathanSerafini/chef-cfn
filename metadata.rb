@@ -109,4 +109,3 @@ recipe 'chef_cfn::shutdown',  'Installs a service which will delete the node'
 # Resources
 #
 provides 'chef_cfn::chef_cfn_signal'
-

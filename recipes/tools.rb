@@ -62,4 +62,3 @@ template '/etc/cfn/hooks.d/cfn-auto-reloader.conf' do
     node[:cfn][:stack][:stack_name] rescue false
   end
 end
-

@@ -23,4 +23,3 @@ action :signal do
     notifies  :run, "ruby_block[#{new_resource.name}]", :immediately
   end
 end
-

@@ -107,4 +107,3 @@ Ohai.plugin(:CFN) do
     cfn_properties_hints.each { |k,v| cfn[:properties][k] = v }
   end
 end
-

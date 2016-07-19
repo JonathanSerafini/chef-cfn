@@ -12,4 +12,3 @@ service 'chef_lifecycle' do
     node[:cfn][:tools][:delete_on_shutdown]
   end
 end
-

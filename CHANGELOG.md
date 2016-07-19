@@ -4,6 +4,7 @@ chef\_cfn changelog
 v0.9.2
 ------
 * Rubocop auto-correct Style/StringLiterals
+* Rubocop auto-correct Style/TrailingBlankLines
 
 v0.9.1
 ------

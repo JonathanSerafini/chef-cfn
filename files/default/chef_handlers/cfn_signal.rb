@@ -40,4 +40,3 @@ module CFN
     end
   end
 end
-

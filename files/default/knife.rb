@@ -4,4 +4,3 @@
   value = value.split(' ').last.gsub('"','')
   send(pattern, value)
 end
-
