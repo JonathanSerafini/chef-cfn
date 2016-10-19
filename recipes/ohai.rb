@@ -16,6 +16,5 @@ end
 ohai_plugin 'cfn' do
   source_file 'ohai_plugins/cfn.rb'
   compile_time true
-  notifies :reload, "ohai[cfn]"
+  notifies :reload, 'ohai[cfn]'
 end
-

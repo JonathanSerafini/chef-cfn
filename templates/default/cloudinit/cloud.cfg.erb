@@ -1,0 +1,35 @@
+<% @cloud_params.each do |key, value| %>
+<%= key %> = <%= value %>
+<% end %>
+
+# Restrict datasources to Ec2 and provide default values
+datasource_list: [Ec2]
+datasource:
+  Ec2:
+    metadata_urls: ['http://169.254.169.254']
+
+# Modules that should run during early boot
+cloud_init_modules:
+<% @cloud_init_modules.each do |module| %>
+ - <%= module %>
+<% end %>
+
+# Modules that should run after boot
+cloud_config_modules:
+<% @cloud_config_modules.each do |module| %>
+ - <%= module %>
+<% end %>
+
+# Modules that should run after config
+cloud_final_modules:
+<% @cloud_final_modules.each do |module| %>
+ - <%= module %>
+<% end %>
+
+# System and/or distro specific settings
+system_info:
+   distro: ubuntu
+   paths:
+      cloud_dir: /var/lib/cloud/
+      templates_dir: /etc/cloud/templates/
+      upstart_dir: /etc/init/

@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v1.1.0
+------
+* Add boolean to disable cloudformation handler
+
 v1.0.0
 ------
 * Update ohai recipes to rely on the newer ohai v4+ format

@@ -1,5 +1,3 @@
-
-#
 # Ensure deletes the node and client upon shutdown
 #
 cookbook_file '/etc/init.d/chef_lifecycle' do
@@ -7,8 +5,5 @@ cookbook_file '/etc/init.d/chef_lifecycle' do
 end
 
 service 'chef_lifecycle' do
-  action :enable
-  only_if do
-    node[:cfn][:tools][:delete_on_shutdown]
-  end
+  action node['cfn']['shutdown']['service_actions']
 end

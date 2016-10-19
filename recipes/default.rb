@@ -1,6 +1,10 @@
+component = node['cfn']['recipes']
 
-include_recipe 'chef_cfn::ohai'
-include_recipe 'chef_cfn::handler'
-include_recipe 'chef_cfn::mounts'
-include_recipe 'chef_cfn::tools'
-include_recipe 'chef_cfn::shutdown'
+include_recipe 'chef_cfn::python'
+include_recipe 'chef_cfn::ohai'       if component['ohai']
+include_recipe 'chef_cfn::handler'    if component['handler']
+include_recipe 'chef_cfn::cloudinit'  if component['cloudinit']
+include_recipe 'chef_cfn::mounts'     if component['mounts']
+include_recipe 'chef_cfn::tools'      if component['tools']
+include_recipe 'chef_cfn::awslogs'    if component['awslogs']
+include_recipe 'chef_cfn::shutdown'   if component['shutdown']

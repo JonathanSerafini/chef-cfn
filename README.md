@@ -144,6 +144,8 @@ In addition, the properties hash will be merged, and potentially overriden, by a
 
 Installs a handler to signal cloudformation of the success or failure of the chef run. When used with either Creation or Update profiles in cloudformation, we can ensure that only nodes with valid chef runs are considered healthy.
 
+This may be disabled by setting _node.cfn.tools.signal\_cloudformation_.
+
 ###### Required IAM policies
 ```json
 {

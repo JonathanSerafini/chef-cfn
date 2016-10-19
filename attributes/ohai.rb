@@ -1,3 +1,3 @@
-
-# Request that ohai cookbook installs plugins within this cookbooks folder
-default[:ohai][:plugins][:chef_cfn] = 'ohai_plugins'
+# Install the CFN Ohai Plugin
+#
+default['ohai']['plugins']['chef_cfn'] = 'ohai_plugins'
