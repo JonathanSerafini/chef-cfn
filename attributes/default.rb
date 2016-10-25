@@ -5,6 +5,7 @@ default['cfn']['recipes'].tap do |config|
   config['cloudinit'] = false
   config['handler']   = true
   config['mounts']    = true
+  config['ohai']      = true
   config['shutdown']  = true
   config['tools']     = true
 end
