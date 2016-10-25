@@ -1,9 +1,12 @@
 chef\_cfn changelog
 ===================
 
-v1.1.0
+v2.0.0
 ------
+* Refactor code for cookstyle
+* Add recipe feature flags to disable some recipes
 * Add boolean to disable cloudformation handler
+* Add awslogs installation
 
 v1.0.0
 ------
