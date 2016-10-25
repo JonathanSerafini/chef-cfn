@@ -1,4 +1,4 @@
-Chef_cfn Cookbook
+Chef\_cfn Cookbook
 =================
 
 Provide tools to aid in the integration of Chef with AWS Cloudformation.
@@ -8,7 +8,8 @@ Requirements
 
 ### Cookbooks:
 
-* chef_handler
+* chef\_handler
+* python
 * ohai
 
 Attributes
@@ -28,6 +29,11 @@ Attributes
   <tr>
     <td><code>node['cfn']['properties']['mounts']</code></td>
     <td>Provides a mechanism to ensure volumes are mounted during chef</td>
+    <td><code>{}</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']</code></td>
+    <td>Booleans determining which recipes are executed</td>
     <td><code>{}</code></td>
   </tr>
   <tr>
@@ -105,15 +111,27 @@ Attributes
 Recipes
 -------
 
-### chef_cfn::default
+### chef\_cfn::default
 
 Installs dependencies
 
-### chef_cfn::knife
+### chef\_cfn::awslogs
+
+Install and configure the cloudwatch logs service
+
+### chef\_cfn::cloudinit
+
+Configure cloud-init in a more stripped down ec2-specific way. This recipe is mostly of use when packaging AMIs with Packer.
+
+### chef\_cfn::handler
+
+Install the CFN handler to callback to cloudformation on stack updates. Although this is still here, you'd likely be better off simply calling cfn-signal directly from user-data.
+
+### chef\_cfn::knife
 
 (optional) Provides a basic knife.rb
 
-### chef_cfn::ohai
+### chef\_cfn::ohai
 
 Installs the aws-sdk chef_gem as well as the ohai[cfn] plugin.
 When this runs, it will populate the properties, stack, tags and vpc attribute hashes under the node['cfn'] namespace which may then be used to report signals with the signal handler. 
@@ -140,7 +158,7 @@ In addition, the properties hash will be merged, and potentially overriden, by a
 }
 ```
 
-### chef_cfn::handler
+### chef\_cfn::handler
 
 Installs a handler to signal cloudformation of the success or failure of the chef run. When used with either Creation or Update profiles in cloudformation, we can ensure that only nodes with valid chef runs are considered healthy.
 
@@ -184,7 +202,7 @@ This may be disabled by setting _node.cfn.tools.signal\_cloudformation_.
 }
 ```
 
-### chef_cfn::mounts
+### chef\_cfn::mounts
 
 Mounts cloudformation defined volumes.
 
@@ -207,21 +225,21 @@ Please take note that this recipe assumes that cloudformation was responsible to
 }
 ```
 
-### chef_cfn::tools
+### chef\_cfn::tools
 
 Installs cloudformation cfn-init tools such as : 
 
 * cfn-init
 * cfn-hup: Periodic polling of cloudformation resource metadata to determine when triggered actions should run.
 
-### chef_cfn::shutdown
+### chef\_cfn::shutdown
 
 Installs a service which will delete the node when the instance shuts down.
 
 Resources
 ---------
 
-### chef_cfn_signal
+### chef\_cfn_signal
 
 Provides an interface to trigger cloudformation signals from within recipes. This is designed to be used with cloudformation WaitConditions. 
 
