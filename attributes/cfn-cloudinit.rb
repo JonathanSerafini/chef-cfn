@@ -26,14 +26,11 @@ default['cfn']['cloudinit'].tap do |config|
   # Modules that should run after boot
   config['cloud_config_modules'] = %w(
     emit_upstart
-    disk_setup
-    mounts
     runcmd
   )
 
   # Modules that should run after config
   config['cloud_final_modules'] = %w(
-    rightscale_userdata
     scripts-vendor
     scripts-per-once
     scripts-per-boot
