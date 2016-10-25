@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v2.0.1
+------
+* Bugfixes
+
 v2.0.0
 ------
 * Refactor code for cookstyle

@@ -10,20 +10,20 @@ datasource:
 
 # Modules that should run during early boot
 cloud_init_modules:
-<% @cloud_init_modules.each do |module| %>
- - <%= module %>
+<% @cloud_init_modules.each do |m| %>
+ - <%= m %>
 <% end %>
 
 # Modules that should run after boot
 cloud_config_modules:
-<% @cloud_config_modules.each do |module| %>
- - <%= module %>
+<% @cloud_config_modules.each do |m| %>
+ - <%= m %>
 <% end %>
 
 # Modules that should run after config
 cloud_final_modules:
-<% @cloud_final_modules.each do |module| %>
- - <%= module %>
+<% @cloud_final_modules.each do |m| %>
+ - <%= m %>
 <% end %>
 
 # System and/or distro specific settings

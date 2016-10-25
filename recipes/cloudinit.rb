@@ -15,6 +15,7 @@ end
 
 Array(node['cfn']['cloudinit']['delete_cfgs']).each do |cfg|
   template ::File.join('/etc/cloud', cfg) do
+    source 'cloudinit/empty.cfg.erb'
     action :delete
     only_if do
       ::File.directory?('/etc/cloud')
