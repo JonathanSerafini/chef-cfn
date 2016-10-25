@@ -12,7 +12,7 @@ state_file = <%= @path %>/state/agent-state
 #log_group_name = /var/log/syslog
 
 <% @streams.each do |stream,data| %>
-[ <%= stream %> ]
+[<%= stream %>]
 <% data.each do |k, v| %>
 <%= k %> = <%= v %>
 <% end %>
