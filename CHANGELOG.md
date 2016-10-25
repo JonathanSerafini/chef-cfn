@@ -1,6 +1,11 @@
 chef\_cfn changelog
 ===================
 
+v2.0.3
+------
+* Add missing ohai feature flag
+* Remove additional cfn init modules
+
 v2.0.2
 ------
 * cloud-init bugfixes
