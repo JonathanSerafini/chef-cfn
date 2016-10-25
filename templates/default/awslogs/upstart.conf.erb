@@ -1,0 +1,17 @@
+# awslogs : Manage awslogs agent
+description "awslogs agent"
+author      "Jonathan Serafini"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+console log
+nice 15
+respawn
+respawn limit 25 5
+
+setuid <%= @user %>
+setgid <%= @user %>
+
+env AWS_CONFIG_FILE=<%= @path %>/etc/aws.conf
+exec <%= @path %>/bin/aws logs push --config-file <%= @path %>/etc/awslogs.conf --additional-configs-dir <%= @path %>/etc/config

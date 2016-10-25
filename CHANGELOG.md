@@ -1,6 +1,11 @@
 chef\_cfn changelog
 ===================
 
+v2.0.2
+------
+* cloud-init bugfixes
+* awslogs service bugfix
+
 v2.0.1
 ------
 * Bugfixes

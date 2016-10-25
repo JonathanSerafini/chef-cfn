@@ -53,6 +53,19 @@ template "#{node['cfn']['awslogs']['path']}/etc/awslogs.conf" do
   notifies :restart, "service[#{node['cfn']['awslogs']['service']}]"
 end
 
+template 'awslogs-service-template' do
+  path '/etc/init/awslogs.conf'
+  source 'awslogs/upstart.conf.erb'
+  variables lazy {
+    {
+      path: node['cfn']['awslogs']['path'],
+      user: node['cfn']['awslogs']['user'],
+      group: node['cfn']['awslogs']['group']
+    }
+  }
+  notifies :restart, "service[#{node['cfn']['awslogs']['service']}]"
+end
+
 service node['cfn']['awslogs']['service'] do
   action node['cfn']['awslogs']['service_actions']
   only_if do
