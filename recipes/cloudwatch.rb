@@ -12,12 +12,8 @@ chef_handler 'CFN::CloudWatchEventHandler' do
   source path
   arguments lazy {
     {
-      region:     node['cfn']['vpc']['region_id'],
-      config: {
-        report_failure: true,
-        report_success: true,
-        report_cookbooks: true
-      }
+      region: node['cfn']['vpc']['region_id'],
+      config: node['cfn']['cloudwatch'].to_hash
     }
   }
 end

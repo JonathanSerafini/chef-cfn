@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v2.1.1
+------
+* Add missing cloudwatch configuration attributes
+
 v2.1.0
 ------
 * Add cloudwatch events report handler
