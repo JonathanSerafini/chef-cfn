@@ -4,6 +4,11 @@ chef\_cfn Cookbook
 This cookbook provides tools which aid in the integration of Chef and AWS,
 specifically with CloudFormation.
 
+Todo
+----
+
+* This cookbook will shortly be undergoing a refactor and cleanup
+
 Requirements
 ------------
 
