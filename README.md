@@ -1,7 +1,8 @@
-Chef\_cfn Cookbook
+chef\_cfn Cookbook
 =================
 
-Provide tools to aid in the integration of Chef with AWS Cloudformation.
+This cookbook provides tools which aid in the integration of Chef and AWS,
+specifically with CloudFormation.
 
 Requirements
 ------------
@@ -12,8 +13,12 @@ Requirements
 * python
 * ohai
 
-Attributes
-----------
+## Attributes
+
+##### Feature Flags
+
+The recipes included within `default.rb` my be selectively enabled by toggling
+the appropriate feature flags.
 
 <table>
   <tr>
@@ -22,89 +27,79 @@ Attributes
     <td>Default</td>
   </tr>
   <tr>
-    <td><code>node['cfn']['properties']</code></td>
-    <td>Cloudformation metadata properties merged with cfn hint</td>
+    <td><code>node['cfn']['recipes']['awslogs']</code></td>
+    <td>Install the cloudwatch logs daemon named awslogs</td>
+    <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['cloudinit']</code></td>
+    <td>Configure a stripped down cloud-init to speed up cloud instance startup
+        time</td>
+    <td><code>false</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['coudwatch']</code></td>
+    <td>Install a cloudwatch event handler to report chef runs back to
+        cloudwatch events.</td>
+    <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['handler']</code></td>
+    <td>**Deprecated** Install a cfn-init chef handler which will report
+        chef-run success to cloudformatin.
+    <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['mounts']</code></td>
+    <td>Format and mount volumes based on metadata provided in cloudformation</td>
+    <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['ohai']</code></td>
+    <td>Install an ohai plugin to fetch instance, stack and metadata from ec2.
+        </td>
+    <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['shutdown']</code></td>
+    <td>**Deprecated** Install a service which will delete the chef client and
+        node on shutdown</td>
+    <td><code>true</code></td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['recipes']['tools']</code></td>
+    <td>Install the cfn-init and cfn-signal tools</td>
+    <td><code>true</code></td>
+  </tr>
+</table>
+
+##### Ohai Attributes
+
+<table>
+  <tr>
+    <td>Attribute</td>
+    <td>Description</td>
+    <td>Default</td>
+  </tr>
+  <tr>
+    <td><code>node['cfn']['vpc']</code></td>
+    <td>Informaiton related to the VPC</td>
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td><code>node['cfn']['properties']['mounts']</code></td>
-    <td>Provides a mechanism to ensure volumes are mounted during chef</td>
-    <td><code>{}</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['recipes']</code></td>
-    <td>Booleans determining which recipes are executed</td>
+    <td><code>node['cfn']['tags']</code></td>
+    <td>Hash of the EC2 instance tags</td>
     <td><code>{}</code></td>
   </tr>
   <tr>
     <td><code>node['cfn']['stack']</code></td>
-    <td>Cloudformation Stack ohai namespace</td>
+    <td>Hash of Cloudformation stack parameters</td>
     <td><code>{}</code></td>
   </tr>
   <tr>
-    <td><code>node['cfn']['stack']['autoscaling_name']</code></td>
-    <td>Name of the autoscaling group that spawn the instance</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['stack']['logical_id']</code></td>
-    <td>Cloudformation stack logical id</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['stack']['stack_id']</code></td>
-    <td>Cloudformation stack id</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['stack']['stack_name']</code></td>
-    <td>Cloudformation stack name</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['tags']</code></td>
-    <td>Cloudformation Tags ohai namespace, converted to snake case</td>
+    <td><code>node['cfn']['properties']</code></td>
+    <td>Hash of arbitrary metadata provided in cloudformation</td>
     <td><code>{}</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['tools']['delete_on_shutdown']</code></td>
-    <td>Delete the chef node on instance shutdown</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['tools']['cfn_hup']['interval']</code></td>
-    <td>cfn-hup will scan for metadata changes every N seconds</td>
-    <td><code>10</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['tools']['cfn_hup']['verbose']</code></td>
-    <td>Should cfn-hup provide verbose output</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['tools']['url']</code></td>
-    <td>Tarball url for cfn-init installation</td>
-    <td><code></code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['vpc']</code></td>
-    <td>Cloudformation VPC ohai namespace</td>
-    <td><code>{}</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['vpc']['region_id']</code></td>
-    <td>Aws region the instance belongs to</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['vpc']['subnet_id']</code></td>
-    <td>Aws subnet the instance belongs to</td>
-    <td><code>ohai</code></td>
-  </tr>
-  <tr>
-    <td><code>node['cfn']['vpc']['vpc_id']</code></td>
-    <td>Aws vpc the instance belongs to</td>
-    <td><code>ohai</code></td>
   </tr>
 </table>
 
@@ -113,7 +108,7 @@ Recipes
 
 ### chef\_cfn::default
 
-Installs dependencies
+Installs dependencies and includes additional recipes based on *feature flags*.
 
 ### chef\_cfn::awslogs
 
@@ -134,7 +129,7 @@ Install the CFN handler to callback to cloudformation on stack updates. Although
 ### chef\_cfn::ohai
 
 Installs the aws-sdk chef_gem as well as the ohai[cfn] plugin.
-When this runs, it will populate the properties, stack, tags and vpc attribute hashes under the node['cfn'] namespace which may then be used to report signals with the signal handler. 
+When this runs, it will populate the properties, stack, tags and vpc attribute hashes under the node['cfn'] namespace which may then be used to report signals with the signal handler.
 
 In addition, the properties hash will be merged, and potentially overriden, by any hints set in the cfn hint.
 
@@ -227,7 +222,7 @@ Please take note that this recipe assumes that cloudformation was responsible to
 
 ### chef\_cfn::tools
 
-Installs cloudformation cfn-init tools such as : 
+Installs cloudformation cfn-init tools such as :
 
 * cfn-init
 * cfn-hup: Periodic polling of cloudformation resource metadata to determine when triggered actions should run.
@@ -241,7 +236,7 @@ Resources
 
 ### chef\_cfn_signal
 
-Provides an interface to trigger cloudformation signals from within recipes. This is designed to be used with cloudformation WaitConditions. 
+Provides an interface to trigger cloudformation signals from within recipes. This is designed to be used with cloudformation WaitConditions.
 
 #### Actions
 
@@ -271,4 +266,3 @@ Author:: Jonathan Serafini (<jonathan@serafini.ca>)
 Copyright:: 2015, Jonathan Serafini
 
 License:: Apache 2.0
-
