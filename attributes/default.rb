@@ -3,6 +3,7 @@
 default['cfn']['recipes'].tap do |config|
   config['awslogs']   = false
   config['cloudinit'] = false
+  config['cloudwatch']= true
   config['handler']   = true
   config['mounts']    = true
   config['ohai']      = true
