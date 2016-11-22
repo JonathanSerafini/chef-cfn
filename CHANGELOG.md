@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v2.1.0
+------
+* Add cloudwatch events report handler
+
 v2.0.3
 ------
 * Add missing ohai feature flag
