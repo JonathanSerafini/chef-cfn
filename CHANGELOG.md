@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v2.2.0
+------
+* Ensure that the chef shutdown service is configurable
+
 v2.1.1
 ------
 * Add missing cloudwatch configuration attributes

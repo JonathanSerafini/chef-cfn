@@ -138,6 +138,10 @@ When this runs, it will populate the properties, stack, tags and vpc attribute h
 
 In addition, the properties hash will be merged, and potentially overriden, by any hints set in the cfn hint.
 
+### chef\_cfn::shutdown
+
+Installs a service which will delete the Chef client and node when the instance shuts down. This will work _most_ but not _all_ of the time and as such has been deprecated in favor of Cloudwatch Events and Lambda.
+
 ###### Required IAM policies
 ```json
 {

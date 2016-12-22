@@ -1,6 +1,7 @@
 # Ensure deletes the node and client upon shutdown
 #
-cookbook_file '/etc/init.d/chef_lifecycle' do
+template '/etc/init.d/chef_lifecycle' do
+  source 'shutdown/chef_lifecycle.erb'
   mode '0750'
 end
 
