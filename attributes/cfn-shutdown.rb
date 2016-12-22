@@ -11,4 +11,4 @@ default['cfn']['shutdown']['service_actions'] = %w(enable)
 # - *: Any other value is considered as the node_name you wish to delete
 #
 # @since 2.2.0
-default['cfn']['shutdown']['node_name'] = 'DETECT_NODENAME'
+default['cfn']['shutdown']['node_name'] = 'DETECT_CLIENTNAME'
