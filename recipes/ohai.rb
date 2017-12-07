@@ -1,6 +1,7 @@
 # Install dependencies
 #
 chef_gem 'aws-sdk' do
+  version '~> 2'
   compile_time true if respond_to?(:compile_time)
 end
 

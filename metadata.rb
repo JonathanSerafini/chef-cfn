@@ -6,7 +6,7 @@ description      'Chef integration with AWS cloudformation'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url       'https://github.com/JonathanSerafini/chef-cfn/issues'
 source_url       'https://github.com/JonathanSerafini/chef-cfn'
-version          '2.1.1'
+version          '2.1.2'
 
 depends 'chef_handler'
 depends 'ohai', '>= 4.0.0'
