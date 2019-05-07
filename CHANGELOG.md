@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v3.0.0
+------
+* Replace python with poise-python and version bump to Python 3 but limiting to PIP v18.0
+
 v2.1.2
 ------
 * Version-locked aws-ruby-sdk to '~> v2.10.98'

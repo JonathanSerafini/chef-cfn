@@ -12,11 +12,11 @@ end
 
 python_virtualenv node['cfn']['awslogs']['path'] do
   action :create
-  owner node['cfn']['awslogs']['user']
+  user node['cfn']['awslogs']['user']
   group node['cfn']['awslogs']['group']
 end
 
-python_pip 'awscli-cwlogs' do
+python_package 'awscli-cwlogs' do
   virtualenv node['cfn']['awslogs']['path']
   version node['cfn']['awslogs']['version']
 end
