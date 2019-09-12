@@ -1,3 +1,8 @@
+# Abandoned Project
+
+**NOTE**: This project is no longer being maintained.
+
+
 chef\_cfn Cookbook
 =================
 
