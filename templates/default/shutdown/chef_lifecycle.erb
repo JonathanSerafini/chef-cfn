@@ -1,0 +1,36 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:           chef-lifecycle
+# Required-Start:     $local_fs $remote_fs $network $syslog
+# Required-Stop:      $local_fs $remote_fs $network $syslog
+# Default-Start:      2 3 4 5
+# Default-Stop:       0 2 3 4 5 6
+# Short-Description:  registers / deletes chef client
+case $1 in
+  start)
+  ;;
+  stop)
+    echo "***** Deleting node and client *****"
+    node_name="<%= @node_name %>"
+
+    case "${node_name}" in
+      DETECT_HOSTNAME)
+        node_name=$(hostname --fqdn)
+      ;;
+      DETECT_CLIENTNAME)
+        node_name=$(grep node_name /etc/chef/client.rb | cut -d '"' -f 2)
+      ;;
+      DETECT_NODENAME)
+        node_name=<%= node.name %>
+      ;;
+    end
+
+    knife node delete $node_name -c /etc/chef/knife.rb -y
+    knife client delete $node_name -c /etc/chef/knife.rb -y
+  ;;
+  *)
+    echo $0 start or stop
+  ;;
+esac
+
