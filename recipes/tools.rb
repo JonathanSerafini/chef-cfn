@@ -4,9 +4,7 @@
 # - cfn-signal  : cloudformation send signals for Policy
 # - cfn-get-metadata
 #
-python_pip 'awscli-cfninit' do
-  package_name node['cfn']['tools']['url']
-end
+python_execute "-m pip install #{node['cfn']['tools']['url']}"
 
 # Create cfn-hup configurations
 #

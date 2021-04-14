@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v3.1.0
+------
+* Found a way to install python2 using poise-python
+
 v3.0.0
 ------
 * Replace python with poise-python and version bump to Python 3 but limiting to PIP v18.0
