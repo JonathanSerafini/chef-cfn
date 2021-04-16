@@ -14,12 +14,19 @@ python_virtualenv node['cfn']['awslogs']['path'] do
   action :create
   user node['cfn']['awslogs']['user']
   group node['cfn']['awslogs']['group']
+  get_pip_url 'https://bootstrap.pypa.io/pip/2.7/get-pip.py'  
+  pip_version true
+  setuptools_version true
 end
 
-python_package 'awscli-cwlogs' do
+python_execute "-m pip install setuptools" do
   virtualenv node['cfn']['awslogs']['path']
-  version node['cfn']['awslogs']['version']
 end
+
+python_execute "-m pip install awscli-cwlogs" do
+  virtualenv node['cfn']['awslogs']['path']
+end
+
 
 template "#{node['cfn']['awslogs']['path']}/etc/aws.conf" do
   owner 'root'
