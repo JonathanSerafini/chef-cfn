@@ -6,5 +6,5 @@ python_runtime '2' do
     pip_version true
     setuptools_version false
     wheel_version false
-    virtualenv_version false           
+    virtualenv_version false
 end
