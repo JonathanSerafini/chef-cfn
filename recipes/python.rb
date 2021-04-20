@@ -14,11 +14,14 @@ python_runtime '2' do
     virtualenv_version false
 end
 
-remote_file '/tmp/get-pip.py' do
-  source 'https://bootstrap.pypa.io/pip/2.7/get-pip.py'
-  action :create
+cookbook_file '/tmp/pip-20.3.4-py2.py3-none-any.whl' do
+  source  'pip-20.3.4-py2.py3-none-any.whl'
+  owner   'root'
+  group   'root'
+  mode    '0444'
+  action  :create
 end
 
-python_execute '/tmp/get-pip.py --trusted-host=files.pythonhosted.org --trusted-host=pypi.org' do
+python_execute '/tmp/pip-20.3.4-py2.py3-none-any.whl/pip install --no-index pip-20.3.4-py2.py3-none-any.whl' do
     python '2'
 end
