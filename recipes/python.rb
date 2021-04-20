@@ -22,6 +22,6 @@ cookbook_file '/tmp/pip-20.3.4-py2.py3-none-any.whl' do
   action  :create
 end
 
-python_execute '/tmp/pip-20.3.4-py2.py3-none-any.whl/pip install --no-index pip-20.3.4-py2.py3-none-any.whl' do
+python_execute '/tmp/pip-20.3.4-py2.py3-none-any.whl/pip install --no-index /tmp/pip-20.3.4-py2.py3-none-any.whl' do
     python '2'
 end
