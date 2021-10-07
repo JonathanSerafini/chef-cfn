@@ -1,6 +1,10 @@
 chef\_cfn changelog
 ===================
 
+v3.2.0
+------
+* Installing python dependencies by hand
+
 v3.1.0
 ------
 * Found a way to install python2 using poise-python
