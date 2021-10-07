@@ -15,16 +15,45 @@ python_virtualenv node['cfn']['awslogs']['path'] do
   user node['cfn']['awslogs']['user']
   group node['cfn']['awslogs']['group']
   get_pip_url 'https://bootstrap.pypa.io/pip/2.7/get-pip.py'  
-  pip_version true
+  pip_version false
   setuptools_version true
+  system_site_packages true
 end
 
 python_execute "-m pip install setuptools" do
   virtualenv node['cfn']['awslogs']['path']
 end
 
-python_execute "-m pip install awscli-cwlogs" do
-  virtualenv node['cfn']['awslogs']['path']
+[
+  'urllib3-1.21.1-py2.py3-none-any.whl',
+  'six-1.15.0-py2.py3-none-any.whl',
+  'pyasn1-0.4.8-py2.py3-none-any.whl',
+  'rsa-3.3-py2.py3-none-any.whl',
+  'python_dateutil-2.8.2-py2.py3-none-any.whl',
+  'colorama-0.3.3.tar.gz',
+  'jmespath-0.10.0.tar.gz',
+  'docutils-0.17.1-py2.py3-none-any.whl',
+  'botocore-1.7.48-py2.py3-none-any.whl',
+  'futures-3.3.0-py2-none-any.whl',
+  's3transfer-0.1.13-py2.py3-none-any.whl',  
+  'awscli-1.11.190.tar.gz',
+  'certifi-2017.4.17-py2.py3-none-any.whl',
+  'chardet-3.0.4-py2.py3-none-any.whl',
+  'idna-2.5-py2.py3-none-any.whl',
+  'requests-2.18.4-py2.py3-none-any.whl',
+  'awscli-cwlogs-1.4.6.tar.gz',
+].each do |name|
+  cookbook_file "/tmp/#{name}" do
+    source  name
+    owner   'root'
+    group   'root'
+    mode    '0444'
+    action  :create
+  end
+
+  python_execute "-m pip install /tmp/#{name}" do
+    virtualenv node['cfn']['awslogs']['path']
+  end
 end
 
 

@@ -4,6 +4,24 @@
 # - cfn-signal  : cloudformation send signals for Policy
 # - cfn-get-metadata
 #
+[
+  'lockfile-0.12.2-py2.py3-none-any.whl',
+  'pystache-0.5.4.tar.gz',
+	'python-daemon-1.6.1.tar.gz'
+].each do |name|
+  cookbook_file "/tmp/#{name}" do
+    source  name
+    owner   'root'
+    group   'root'
+    mode    '0444'
+    action  :create
+  end
+
+  python_execute "-m pip install /tmp/#{name}" do
+      python '2'
+  end
+end
+
 python_execute "-m pip install #{node['cfn']['tools']['url']}"
 
 # Create cfn-hup configurations
