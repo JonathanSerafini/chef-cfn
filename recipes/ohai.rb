@@ -1,8 +1,15 @@
 # Install dependencies
 #
-chef_gem 'aws-sdk' do
-  version '~> 2'
+{
+	'aws-eventstream' => '1.1.1',
+	'jmespath' => '1.4.0',
+	'aws-sigv4' => '1.2.4',
+	'aws-sdk' => '2.11.632'
+}.each do |name, vers|
+chef_gem name do
+  version vers
   compile_time true if respond_to?(:compile_time)
+end
 end
 
 # Reload the cfn plugin on notify
