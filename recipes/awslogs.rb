@@ -14,7 +14,7 @@ python_virtualenv node['cfn']['awslogs']['path'] do
   action :create
   user node['cfn']['awslogs']['user']
   group node['cfn']['awslogs']['group']
-  get_pip_url 'https://bootstrap.pypa.io/pip/2.7/get-pip.py'  
+  get_pip_url 'https://bootstrap.pypa.io/pip/2.7/get-pip.py'
   pip_version false
   setuptools_version true
   system_site_packages true
@@ -35,7 +35,8 @@ end
   'docutils-0.17.1-py2.py3-none-any.whl',
   'botocore-1.7.48-py2.py3-none-any.whl',
   'futures-3.3.0-py2-none-any.whl',
-  's3transfer-0.1.13-py2.py3-none-any.whl',  
+  's3transfer-0.1.13-py2.py3-none-any.whl',
+  'PyYAML-3.12.tar.gz',
   'awscli-1.11.190.tar.gz',
   'certifi-2017.4.17-py2.py3-none-any.whl',
   'chardet-3.0.4-py2.py3-none-any.whl',
